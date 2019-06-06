@@ -23,4 +23,6 @@ export class SpaceShipComponent implements OnInit {
   ngOnInit() {
   }
 
+  // get pilot full name function
+
 }

@@ -12,5 +12,7 @@ export abstract class SpaceShip {
     this.modelName = modelName;
     this.imageUrl = imageUrl;
     this.pilot = pilot;
+
+    console.log(pilot);
   }
 }
