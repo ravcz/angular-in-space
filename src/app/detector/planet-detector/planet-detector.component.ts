@@ -16,20 +16,18 @@ export class PlanetDetectorComponent implements OnInit {
     this.planets.push(new Planet(636, 252, 100));
     this.planets.push(new Planet(155, 243, 200));
 
+    console.log(this.planets);
+
   }
 
-//   update(x) {
-// console.log(x);
-//   }
-
-  test(e) {
-    for (var planet in this.planets) {
-      console.log(planet);
-      // let dx = e.layerX - planet.x;
-      // let dy = e.layerY - planet.y;
-      // if (Math.sqrt(dx * dx + dy * dy) < 100) {
-      //   console.log('BLISKO');
-      // }
+  detect(coordinates) { // typ Point x,y
+    for (var key in this.planets) {
+      let dx = coordinates.x - parseInt(this.planets[key].x);
+      let dy = coordinates.y - this.planets[key].y;
+      console.log(Math.sqrt(dx * dx + dy * dy));
+      if (Math.sqrt(dx * dx + dy * dy) < this.planets[key].radius) {
+        console.log('BLISKO');
+      }
     }
   }
 

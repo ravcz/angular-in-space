@@ -1,4 +1,4 @@
-export class Planet {
+export abstract class Planet {
   x: number;
   y: number;
   radius: number;
@@ -8,4 +8,6 @@ export class Planet {
     this.y = y;
     this.radius = radius;
   }
+
+
 }
