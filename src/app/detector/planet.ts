@@ -8,6 +8,4 @@ export abstract class Planet {
     this.y = y;
     this.radius = radius;
   }
-
-
 }
