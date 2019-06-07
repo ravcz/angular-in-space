@@ -12,4 +12,8 @@ export class PlanetDetectorComponent implements OnInit {
   ngOnInit() {
   }
 
+  update(x) {
+console.log(x);
+  }
+
 }

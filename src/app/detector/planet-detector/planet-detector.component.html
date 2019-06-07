@@ -1,7 +1,7 @@
 <p>
   planet-detector works!
 </p>
-<div class="container">
+<div class="container" (mousemove)="update({x: $event.layerX, y: $event.layerY})">
   <div class="noise"></div>
   <div class="p1 planet"></div>
   <div class="p2 planet"></div>
