@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { SpaceShipType } from '../space-ship-type.enum';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { OrderFormValue } from '../order-form-value';
+import { SpaceShip } from '../space-ship';
+import { SpaceShipService } from '../space-ship.service';
 
 interface ShipType {
   label: string;
@@ -15,13 +17,16 @@ interface ShipType {
 })
 export class EngineersRoomComponent implements OnInit {
 
+  isProducing: boolean;
+  @Output() shipProduced = new EventEmitter<SpaceShip>();
+
   spaceShipTypes: ShipType[] = [
-    {label: 'Myśliwiec', value: SpaceShipType.Fighter},
-    {label: 'Bombowiec', value: SpaceShipType.Bomber}
+    {label: 'Myśliwiec', value: SpaceShipType.FighterShip},
+    {label: 'Bombowiec', value: SpaceShipType.BomberShip}
   ];
 
   form = new FormGroup({
-    shipType: new FormControl(SpaceShipType.Fighter, {
+    shipType: new FormControl(SpaceShipType.FighterShip, {
       validators: [Validators.required]
     }),
     shipCount: new FormControl(1, {
@@ -29,13 +34,21 @@ export class EngineersRoomComponent implements OnInit {
     })
   });
 
-  constructor() { }
+  constructor(
+    private spaceShipService: SpaceShipService
+  ) { }
 
   ngOnInit() {
   }
 
-  orderSpaceShips(formValue: OrderFormValue) {
-    console.log(formValue);
-}
+  orderSpaceShips(formValues: OrderFormValue) {
+    console.log(formValues);
+    this.isProducing = true;
+    this.spaceShipService.produceShips(formValues)
+        .subscribe({
+          next: (ship) => this.shipProduced.emit(ship),
+          complete: () => this.isProducing = false
+        });
+  }
 
 }
