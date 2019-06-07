@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Planet } from '../planet';
+import { Saturn } from '../planets/saturn';
+import { Jowisz } from '../planets/jowisz';
+import { Point } from '../interfaces/point';
 
 @Component({
   selector: 'app-planet-detector',
@@ -8,27 +11,64 @@ import { Planet } from '../planet';
 })
 export class PlanetDetectorComponent implements OnInit {
 
+  discover: string;
   planets: Planet[] = [];
+  opacity = 1;
+
+  axisYTop = 0;
+  axisXLeft = 0;
+
+  planetFound: Planet;
+
 
   constructor() { }
 
   ngOnInit() {
-    // this.planets.push(new Planet(636, 252, 100));
-    // this.planets.push(new Planet(155, 243, 200));
+    this.planets.push(new Saturn(645, 234, 60));
+    this.planets.push(new Jowisz(167, 230, 100));
 
-    console.log(this.planets);
+    // console.log(this.planets);
 
   }
 
-  detect(coordinates) { // typ Point x,y
-    // for (var key in this.planets) {
-    //   let dx = coordinates.x - parseInt(this.planets[key].x);
-    //   let dy = coordinates.y - this.planets[key].y;
-    //   console.log(Math.sqrt(dx * dx + dy * dy));
-    //   if (Math.sqrt(dx * dx + dy * dy) < this.planets[key].radius) {
-    //     console.log('BLISKO');
-    //   }
-    // }
+  detect(point: Point) {// coordinates typ Point x,y
+
+    this.discover = null;
+    console.log(point);
+    for (const key in this.planets) {
+        const dx = point.x - this.planets[key].x;
+        const dy = point.y - this.planets[key].y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+        console.log('distance: ' + distance);
+
+        let opacity = Math.round(distance / this.planets[key].radius * 100) / 100;
+        console.log('opacity '+ opacity);
+        if(opacity < 1 ){
+          this.opacity = opacity;
+          this.planetFound = this.planets[key];
+          break;
+        } else{
+          this.opacity = 1;
+        }
+
+        if ( distance <= this.planets[0].radius) {
+          console.log('znalazłem');
+        }
+    }
+  }
+
+  crosshair(e) {
+   console.log(e.layerX);
+
+    // this.axisXTop = points.x;
+   this.axisXLeft = e.layerX - 5;
+   this.axisYTop = e.layerY - 5;
+  }
+
+  inform() {
+    if (this.planetFound) {
+      this.discover = 'Wykryto nową plnetę';
+    }
   }
 
 }

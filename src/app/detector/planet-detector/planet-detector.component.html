@@ -1,9 +1,13 @@
 <p>
   planet-detector works!
 </p>
-<div class="container" (mousemove)="detect({x: $event.layerX, y: $event.layerY})">
-  <div class="noise"></div>
+<div class="container">
+  <div class="noise" [style.opacity]="opacity" (click)="inform()" (mousemove)="detect({x: $event.layerX, y: $event.layerY}); crosshair($event); "></div>
+  <div id="vertical" [style.left.px]="axisXLeft" ></div>
+  <div id="horizontal" [style.top.px]="axisYTop" ></div>
   <!-- <div class="p1 planet"></div>
   <div class="p2 planet"></div> -->
+
+  <span *ngIf="discover" class="inform">{{discover}}</span>
 
 </div>

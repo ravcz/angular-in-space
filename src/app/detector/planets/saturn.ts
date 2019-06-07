@@ -1,2 +1,4 @@
-export class Saturn {
+import { Planet } from '../planet';
+
+export class Saturn extends Planet {
 }
