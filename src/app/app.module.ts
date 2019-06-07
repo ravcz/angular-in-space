@@ -6,16 +6,18 @@ import { AppComponent } from './app.component';
 
 import { A2sCommModule } from 'a2s-comm';
 import { SpaceModule } from './space/space.module';
+import { DetectorModule } from './detector/detector.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     A2sCommModule,
-    SpaceModule
+    SpaceModule,
+    DetectorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
