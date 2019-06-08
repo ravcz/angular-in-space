@@ -17,6 +17,29 @@
       "firstName": "Karl",
       "lastName": "Ahathon",
       "imageUrl": null
+    },
+    {
+      "id": 4,
+      "firstName": "Ass",
+      "lastName": "sd",
+      "imageUrl": "/assets/unknown-pilot.gif"
+    },
+    {
+      "id": 5,
+      "firstName": "ASD",
+      "lastName": "sds",
+      "imageUrl": "/assets/unknown-pilot.gif"
+    }
+  ],
+  "forbidden-names": [
+    {
+      "name": "Maruda"
+    },
+    {
+      "name": "Ciamajda"
+    },
+    {
+      "name": "Gapcio"
     }
   ]
 }
