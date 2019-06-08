@@ -7,6 +7,7 @@ import { SpaceShip } from './space-ship';
 import { SpaceShipType } from './space-ship-type.enum';
 import { FighterShip } from './fighter-ship';
 import { BomberShip } from './bomber-ship';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,10 @@ export class SpaceShipService {
 
   hangarShips = new BehaviorSubject<SpaceShip[]>([]);
 
-  constructor() { }
+  constructor(
+    private spaceShipService: SpaceShipService,
+    private router: Router
+  ) {}
 
   produceShips(formValues: OrderFormValue): Observable<SpaceShip> {
     const shipClass = formValues.shipType === SpaceShipType.FighterShip ? FighterShip : BomberShip;
@@ -26,5 +30,11 @@ export class SpaceShipService {
       take(formValues.shipCount),
       tap((spaceShip) => this.hangarShips.next([...this.hangarShips.getValue(), spaceShip]))
     );
+  }
+
+  removeShip(shipIndex: number) {
+    const ships = [...this.hangarShips.getValue()];
+    ships.splice(shipIndex, 1);
+    this.hangarShips.next(ships);
   }
 }
