@@ -7,18 +7,17 @@ export class SpaceImageDirective {
 
   zoom = 1.0;
 
-  @HostBinding('style.transform') get styleTransform() {
-    return this.zoom;
+  constructor() { }
+
+  @HostBinding('style.transform') get scale() {
+    return `scale(${this.zoom})`;
   }
 
-  @HostListener('mousemove') onMouseOver() {
+  @HostListener('mousemove') zoomIn() {
     this.zoom += 0.005;
   }
 
-  @HostListener('mouseout') onMouseOut() {
-    this.zoom += 1.0;
+  @HostListener('mouseout') zoomOut() {
+    this.zoom = 1.0;
   }
-
-  constructor() { }
-
 }
